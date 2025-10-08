@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Test Dockerfile
         run: |
+          pwd
+          ls -la
+          echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
           docker build -t imgvulne:1.1 .
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
