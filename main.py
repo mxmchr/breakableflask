@@ -294,6 +294,7 @@ def listservices():
     except Exception as e:
         return str(e)
     
+    
     linker = lambda x,y : '<a href="/listservices?{}={}">{}</a>'.format(param, y, y) if x==columns.index(param) else str(y)
     results_html = '<tr>\n<td>' + '</tr>\n<tr>\n<td>'.join(['</td>\n<td>'.join([linker(c, b) for b, c in zip(a, range(0,len(a)))]) for a in results]) + '\n</tr>'
     
@@ -310,7 +311,7 @@ def listservices():
         </body>
     </html>
     """
-    
+
 
 if __name__ == "__main__":
 
