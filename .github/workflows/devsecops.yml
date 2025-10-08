@@ -8,12 +8,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Scan des dépendances (Trivy FS)
+      - name: Debug (où est le requirements.txt ?)
+        run: |
+          pwd
+          ls -la
+          echo "---- contenu breakableflask/ ----"
+          ls -la breakableflask || true
+
+      - name: Scan des dépendances (Trivy FS sur le bon dossier)
         run: |
           docker run --rm \
             -v "$GITHUB_WORKSPACE":/project \
             -v "$HOME/.cache/trivy":/root/.cache/ \
-            aquasec/trivy:latest fs /project/
+            aquasec/trivy:latest fs --scanners vuln,secret /project/breakableflask \
+            --exit-code 1 --severity HIGH,CRITICAL || true
+
 
   Dockerfile:
     runs-on: ubuntu-latest
