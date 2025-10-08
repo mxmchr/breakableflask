@@ -10,7 +10,6 @@ jobs:
 
       - name: Scan des dépendances (Trivy FS)
         run: |
-          set -euo pipefail
           docker run --rm \
             -v "$GITHUB_WORKSPACE":/project \
             -v "$HOME/.cache/trivy":/root/.cache/ \
