@@ -10,6 +10,7 @@ jobs:
 
       - name: Scan des dépendances (Trivy FS sur le bon dossier)
         run: |
+          ls -al
           docker run --rm \
             -v ./:/project \
             -v "$HOME/.cache/trivy":/root/.cache/ \
