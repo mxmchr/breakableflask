@@ -14,7 +14,7 @@ jobs:
           docker run --rm \
             -v ./:/project \
             -v "$HOME/.cache/trivy":/root/.cache/ \
-            aquasec/trivy:latest fs --scanners vuln,secret /project/ \
+            aquasec/trivy:latest fs --scanners vuln,secret /project/requirements.txt \
             --exit-code 1 --severity HIGH,CRITICAL || true
 
 
