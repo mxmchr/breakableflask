@@ -23,24 +23,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Debug workspace
-        run: |
-          pwd
-          ls -la
-          echo "---- contenu breakableflask/ ----"
-          ls -la breakableflask || true
-          echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
-
       - name: Installer jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Build image (Dockerfile dans breakableflask/)
-        working-directory: breakableflask
+      - name: Build image
         run: |
-          set -euo pipefail
           docker build -t imgvulne:1.1 .
 
-      - name: Scan de l'image (Trivy Image) + formatage
+      - name: Scan de l'image (Trivy Image)
         run: |
           set -euo pipefail
           docker run --rm \
